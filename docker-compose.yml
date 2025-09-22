@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_USER: n8n
+      POSTGRES_PASSWORD: n8npassword
+      POSTGRES_DB: n8ndb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  n8n:
+    image: n8nio/n8n:latest
+    restart: always
+    user: "1000:1000"
+    environment:
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_DATABASE: n8ndb
+      DB_POSTGRESDB_USER: n8n
+      DB_POSTGRESDB_PASSWORD: n8npassword
+      N8N_CUSTOM_EXTENSIONS_DIR: /home/node/.n8n/custom
+      N8N_ENV: development
+    ports:
+      - "5678:5678"
+    volumes:
+      - ./dist:/home/node/.n8n/custom
+      - ./n8n:/home/node/.n8n/data
+    depends_on:
+      - postgres
+volumes:
+  postgres_data:
