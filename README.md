@@ -1,6 +1,6 @@
 # 🎲 n8n Random Number Generator
 
-Um nó customizado para n8n que gera números verdadeiramente aleatórios usando a API do Random.org, baseada em ruído atmosférico para máxima aleatoriedade.
+Um nó customizado para n8n que gera números verdadeiramente aleatórios entre um número mínimo e máximo usando a API do Random.org.
 
 ## 📋 Índice
 
@@ -18,7 +18,7 @@ Um nó customizado para n8n que gera números verdadeiramente aleatórios usando
 
 ## 🎯 Sobre o Projeto
 
-Este projeto implementa um nó customizado para n8n que integra com a API do [Random.org](https://www.random.org/) para gerar números verdadeiramente aleatórios baseados em ruído atmosférico. 
+Este projeto implementa um nó customizado para n8n que integra com a API do [Random.org](https://www.random.org/) para gerar números verdadeiramente aleatórios. 
 
 **Este foi meu primeiro contato com automação n8n** e foi extremamente gratificante concluir este desafio! Durante o desenvolvimento, aprendi muito sobre:
 - Desenvolvimento de nós customizados para n8n
@@ -30,12 +30,11 @@ Este projeto implementa um nó customizado para n8n que integra com a API do [Ra
 
 ## ✨ Características
 
-- 🎲 **Números verdadeiramente aleatórios** usando ruído atmosférico
+- 🎲 **Números verdadeiramente aleatórios** utilizando API externa Random.org
 - 🔧 **Fácil configuração** com valores mínimo e máximo customizáveis
 - 🐳 **Ambiente Docker** completo com PostgreSQL
 - 📦 **Script automatizado** para instalação e execução
 - 🛠️ **Desenvolvido em TypeScript** seguindo padrões do n8n
-- 🔄 **Hot reload** durante desenvolvimento
 
 ## 🔧 Pré-requisitos
 
@@ -320,7 +319,7 @@ Este projeto foi desenvolvido seguindo a documentação oficial do n8n:
 
 ## 👨‍💻 Sobre o Desenvolvedor
 
-**Heitor Oliveiro** - Desenvolvedor Full Stack
+**Heitor Oliveiro** - Desenvolvedor Full Stack Júnior
 
 Este projeto representa meu **primeiro contato com automação n8n** e foi uma experiência de aprendizado incrível! Durante o desenvolvimento, pude:
 
@@ -359,4 +358,4 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
 
 ---
 
-⭐ **Se este projeto te ajudou, considere dar uma estrela no repositório!**
+⭐ **Se gostou deste projeto, considere dar uma estrela no repositório!**
