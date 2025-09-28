@@ -9,11 +9,11 @@ import type {
 import {NodeOperationError} from 'n8n-workflow';
 
 // classe principal
-export class RandomNumberGen implements INodeType {
+export class Random implements INodeType {
     // descrição do nó
     description: INodeTypeDescription = {
         displayName: 'True Random Numbers Generator',
-        name: 'randomNumberGen',
+        name: 'random',
         icon: 'file:random.svg',
         group: ['transform'],
         version: 1,

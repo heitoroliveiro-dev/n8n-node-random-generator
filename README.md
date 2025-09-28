@@ -104,7 +104,7 @@ cd n8n-nodes-random-number-gen
 # Instale as dependências
 npm install
 
-# Compile o nó customizado
+# Compile o nó customizado (usando build customizado)
 npm run build
 
 # Volte para a raiz
@@ -174,6 +174,32 @@ O nó possui as seguintes configurações:
 
 ## 🛠️ Desenvolvimento
 
+### ⚠️ Nota Importante sobre Build
+
+Este projeto utiliza um **build customizado** para contornar problemas com o CLI oficial `n8n-node build`. O script `build.js` substitui o comando padrão e oferece:
+
+- ✅ **Build confiável** usando TypeScript diretamente
+- ✅ **Feedback claro** sobre o processo de compilação
+- ✅ **Cópia automática** de assets (ícones)
+- ✅ **Validação** dos arquivos gerados
+
+### Scripts Disponíveis
+
+```bash
+# Build principal (recomendado) - usa script customizado
+npm run build
+
+# Build com n8n-node CLI (pode falhar em alguns ambientes)
+npm run build:n8n
+
+# Desenvolvimento com hot reload
+npm run build:watch
+
+# Verificar código
+npm run lint
+npm run lint:fix
+```
+
 ### Ambiente de Desenvolvimento
 
 Para modificar e desenvolver o nó:
@@ -199,8 +225,8 @@ npm run lint:fix
 ### Estrutura do Código
 
 ```typescript
-// nodes/Random/RandomNumberGen.node.ts
-export class RandomNumberGen implements INodeType {
+// nodes/Random/Random.node.ts
+export class Random implements INodeType {
     description: INodeTypeDescription = {
         // Configuração da interface do nó
     };
@@ -214,10 +240,13 @@ export class RandomNumberGen implements INodeType {
 ### Comandos Úteis
 
 ```bash
-# Recompilar após mudanças
+# Recompilar após mudanças (usando build customizado)
 cd n8n-nodes-random-number-gen && npm run build
 
-# Reiniciar n8n
+# Alternativamente, usar build com n8n CLI (pode falhar)
+cd n8n-nodes-random-number-gen && npm run build:n8n
+
+# Reiniciar n8n para carregar mudanças
 docker-compose restart n8n
 
 # Ver logs em tempo real
@@ -225,6 +254,9 @@ docker-compose logs -f n8n
 
 # Parar tudo
 docker-compose down
+
+# Rebuild completo (limpar + compilar + reiniciar)
+cd n8n-nodes-random-number-gen && npm run build && cd .. && docker-compose restart n8n
 ```
 
 ## 📁 Estrutura do Projeto
@@ -238,20 +270,43 @@ n8n-node-random-generator/
 └── n8n-nodes-random-number-gen/
     ├── package.json            # Configuração do pacote npm
     ├── tsconfig.json           # Configuração TypeScript
+    ├── build.js                # 🆕 Script de build customizado
     ├── nodes/
     │   └── Random/
-    │       ├── RandomNumberGen.node.ts  # Código principal do nó
+    │       ├── Random.node.ts      # Código principal do nó
     │       └── random.svg      # Ícone do nó
     └── dist/                   # Arquivos compilados (gerado)
         ├── package.json
         └── nodes/
             └── Random/
-                ├── RandomNumberGen.node.js
-                ├── RandomNumberGen.node.d.ts
+                ├── Random.node.js
+                ├── Random.node.d.ts
+                ├── Random.node.js.map
                 └── random.svg
 ```
 
 ## 🔧 Solução de Problemas
+
+### Build do TypeScript falha
+
+Se o comando `npm run build:n8n` falhar com "TypeScript build failed":
+
+1. **Use o build customizado** (recomendado):
+   ```bash
+   npm run build
+   ```
+
+2. **Verifique se o TypeScript funciona manualmente**:
+   ```bash
+   npx tsc --noEmit  # Verificar erros
+   npx tsc           # Compilar diretamente
+   ```
+
+3. **Limpe e recompile**:
+   ```bash
+   rm -rf dist
+   npm run build
+   ```
 
 ### Nó não aparece na interface
 
